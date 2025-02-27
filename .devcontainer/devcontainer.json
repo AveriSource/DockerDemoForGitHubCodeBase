@@ -1,5 +1,5 @@
 {
-    "name": "Windows .NET Development",
+    "name": ".NET Development",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "dockerdemo",
     "workspaceFolder": "/src",
@@ -14,7 +14,16 @@
     },
     "features": {
         "ghcr.io/devcontainers/features/dotnet:1": {},
-        "ghcr.io/devcontainers/features/git:1": {}
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/desktop-lite:1": {}
     },
-    "remoteUser": "ContainerAdministrator"
-} 
+    "forwardPorts": [6080],
+    "portsAttributes": {
+        "6080": {
+            "label": "Desktop (VNC Web)",
+            "onAutoForward": "notify"
+        }
+    },
+    "remoteUser": "root",
+    "postCreateCommand": "dotnet restore"
+}
