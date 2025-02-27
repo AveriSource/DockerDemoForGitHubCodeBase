@@ -1,0 +1,20 @@
+{
+    "name": "Windows .NET Development",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "dockerdemo",
+    "workspaceFolder": "/src",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csharp",
+                "ms-vscode.powershell",
+                "formulahendry.dotnet-test-explorer"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/dotnet:1": {},
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "remoteUser": "ContainerAdministrator"
+} 

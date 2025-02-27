@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  dockerdemo:
+    image: dockerdemo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/src 
