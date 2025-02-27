@@ -11,6 +11,7 @@ services:
       - DISPLAY=:99
     ports:
       - "8080:80"
+      - "6080:6080"  # VNC web access port
     volumes:
       - .:/src
       - /tmp/.X11-unix:/tmp/.X11-unix
