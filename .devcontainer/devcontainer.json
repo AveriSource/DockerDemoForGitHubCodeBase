@@ -2,7 +2,6 @@
     "name": ".NET Development",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "dockerdemo",
-    "workspaceFolder": "/src",
     "customizations": {
         "vscode": {
             "extensions": [
