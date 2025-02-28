@@ -1,10 +1,10 @@
 {
     "name": "DockerDemo Development",
-    "dockerComposeFile": "../docker-compose.yml",
-    "service": "dockerdemo",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-    "remoteUser": "vscode",
-    "overrideCommand": true,
+    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/desktop-lite:1": {}
+    },
     "customizations": {
         "vscode": {
             "extensions": [
@@ -13,11 +13,6 @@
                 "ms-vscode.powershell"
             ]
         }
-    },
-    "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-        "ghcr.io/devcontainers/features/dotnet:1": {},
-        "ghcr.io/devcontainers/features/desktop-lite:1": {}
     },
     "forwardPorts": [8080, 6080],
     "portsAttributes": {
@@ -30,6 +25,6 @@
             "onAutoForward": "notify"
         }
     },
-    "initializeCommand": "mkdir -p ${localWorkspaceFolder}/.devcontainer/scripts",
+    "remoteUser": "vscode",
     "postCreateCommand": "sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}"
 }
