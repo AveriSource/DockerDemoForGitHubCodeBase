@@ -1,0 +1,29 @@
+# Use Windows Server Core as the base image
+FROM mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2019 AS build
+
+# Set working directory
+WORKDIR /app
+
+# Copy the solution file and project files
+COPY *.sln .
+COPY Winform/*.csproj ./Winform/
+COPY ConsoleApp/*.csproj ./ConsoleApp/
+COPY DockerDemo/*.csproj ./DockerDemo/
+
+# Restore NuGet packages
+RUN dotnet restore
+
+# Copy the rest of the source code
+COPY . .
+
+# Build and publish the Windows Forms application
+RUN dotnet publish Winform/Winform.csproj -c Release -o /app/publish
+
+# Create the runtime image
+FROM mcr.microsoft.com/dotnet/runtime:8.0-windowsservercore-ltsc2019
+
+WORKDIR /app
+COPY --from=build /app/publish .
+
+# Set the entry point
+ENTRYPOINT ["dotnet", "Winform.dll"] 

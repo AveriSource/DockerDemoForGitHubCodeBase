@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  winform:
+    build:
+      context: .
+      dockerfile: Dockerfile.windows
+    ports:
+      - "3389:3389"  # RDP port
+    environment:
+      - DOTNET_ENVIRONMENT=Development 
