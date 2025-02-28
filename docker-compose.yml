@@ -9,13 +9,14 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Development
       - DISPLAY=:99
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "8080:80"
       - "6080:6080"  # VNC web access port
     volumes:
-      - .:/src
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    user: vscode
+      - ../:/workspaces:cached
+      - /var/run/docker.sock:/var/run/docker.sock
     security_opt:
       - seccomp:unconfined
     cap_add:
