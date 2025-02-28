@@ -11,13 +11,10 @@ sudo apt-get install -y \
     libnss3 \
     libgtk-3-0 \
     libgdk-pixbuf2.0-0 \
-    libasound2
-
-# Install .NET Windows Desktop Runtime
-wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-chmod +x dotnet-install.sh
-./dotnet-install.sh --channel 8.0 --runtime windowsdesktop
-rm dotnet-install.sh
+    libasound2 \
+    wine64 \
+    xvfb \
+    x11vnc
 
 # Set permissions
 sudo chown -R vscode:vscode /workspaces/${localWorkspaceFolderBasename}
@@ -27,6 +24,13 @@ echo "export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1" >> ~/.bashrc
 echo "export DISPLAY=:99" >> ~/.bashrc
 
 # Start X11 and VNC services
-sudo service dbus start || true
-sudo service x11-common start || true
-sudo /usr/local/share/desktop-init.sh || true 
+Xvfb :99 -screen 0 1024x768x16 &
+sleep 2
+x11vnc -forever -shared -display :99 &
+
+# Install .NET SDK with Windows compatibility
+wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-8.0 
